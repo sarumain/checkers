@@ -5,7 +5,7 @@ public class Board {
 	Piece[][] pieces;
 	
 	Board() {
-		Piece[][] pieces = new Piece[8][8]; // creates 8x8 array, of which the entries are either NULL or represent a checkers piece
+		pieces = new Piece[8][8]; // creates 8x8 array, of which the entries are either NULL or represent a checkers piece
 		specifiyPieces();
 	}
 	
