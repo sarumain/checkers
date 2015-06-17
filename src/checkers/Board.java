@@ -28,12 +28,12 @@ public class Board {
 		
 	}
 	
-	public void movePiece(int y, int x, Piece pieces[][]) {
+	public void movePiece(Piece pieces[][], int oldY, int oldX, int newY, int newX) {
 		if (isMoveLegal(y,x,pieces) == true) {
 		}
 	}
 	
-	public boolean isMoveLegal(int y, int x, Piece pieces[][]) {
+	public boolean isMoveLegal(Piece pieces[][], int oldY, int oldX, int newY, int newX) {
 		return true;
 	}
 
