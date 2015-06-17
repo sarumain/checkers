@@ -2,12 +2,12 @@ package checkers;
 
 public class Piece {
 	
-	private boolean isPieceRed;
+	boolean isPieceRed;
 	int X;
 	int Y;
 	
 	public Piece() {
-		this.setPieceRed(isPieceRed);
+		this.isPieceRed = isPieceRed;
 		this.X = X;
 		this.Y = Y;
 	}
