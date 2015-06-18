@@ -2,10 +2,9 @@ package checkers;
 
 public class Board {
 	
-	Piece[][] pieces;
+	Piece[][] pieces = new Piece[8][8];
 	
 	Board() {
-		pieces = new Piece[8][8]; // creates 8x8 array, of which the entries are either NULL or represent a checkers piece
 		specifiyPieces();
 	}
 	
@@ -28,14 +27,14 @@ public class Board {
 		
 	}
 	
-	public void movePiece(Piece pieces[][], int oldY, int oldX, int newY, int newX) {
-		if (isMoveLegal(pieces, oldY, oldX, newY, newX) == true) {
+	public void movePiece(int oldY, int oldX, int newY, int newX) {
+		if (isMoveLegal(oldY, oldX, newY, newX) == true) {
 			pieces[newY][newX].Red = pieces[oldY][oldX].Red;
 			pieces[oldY][oldX] = null;
 		}
 	}
 	
-	public boolean isMoveLegal(Piece pieces[][], int oldY, int oldX, int newY, int newX) {
+	public boolean isMoveLegal(int oldY, int oldX, int newY, int newX) {
 		return true;
 	}
 
