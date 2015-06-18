@@ -29,7 +29,9 @@ public class Board {
 	}
 	
 	public void movePiece(Piece pieces[][], int oldY, int oldX, int newY, int newX) {
-		if (isMoveLegal(y,x,pieces) == true) {
+		if (isMoveLegal(pieces, oldY, oldX, newY, newX) == true) {
+			pieces[newY][newX].Red = pieces[oldY][oldX].Red;
+			pieces[oldY][oldX] = null;
 		}
 	}
 	
