@@ -18,12 +18,12 @@ public class Game {
 				for (int x = 0; x < 8; x++) {
 					if (x % 2 == y % 2) {
 						if (y <= 2) {
-							 pieces[pieceNumber].pieceType = 0; // creates a red checkers piece
-							 positions[pieceNumber].setLocation(y, x);
-							 map.put(pieces[pieceNumber], positions[pieceNumber]);
-							 pieceNumber = pieceNumber - 1;
+							pieces[pieceNumber].pieceType = 0; // creates a red checkers piece
+							positions[pieceNumber].setLocation(y, x);
+							map.put(pieces[pieceNumber], positions[pieceNumber]);
+							pieceNumber = pieceNumber - 1;
 						} else if (y >= 5) {
-							pieces[pieceNumber].pieceType = 1; // creates a red checkers piece
+							pieces[pieceNumber].pieceType = 1; // creates a black checkers piece
 							positions[pieceNumber].setLocation(y, x);
 							map.put(pieces[pieceNumber], positions[pieceNumber]);
 							pieceNumber = pieceNumber - 1;
