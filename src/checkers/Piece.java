@@ -2,13 +2,14 @@ package checkers;
 
 public class Piece {
 	
-	boolean Red;
+	int x;
+	int y;
+	int pieceType;
 	
-	public Piece(boolean Red) {
-		this.Red = Red;
+	public Piece(int x, int y, int pieceType) {
+		this.x = x;
+		this.y = y;
+		this.pieceType = pieceType;
 	}
-	
-	public boolean Red() {
-		return Red;
-	}
+
 }

@@ -1,10 +1,9 @@
 package checkers;
 
-public class Main {
-
-	public static void main(String[] args) {
-		Board b = new Board();
-
-	}
+import java.util.*;
+import java.awt.Point;
+ 
+public class Main{
+        public static void main(String[] args){
 
 }
