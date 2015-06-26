@@ -42,15 +42,12 @@ public class Game {
 	} // end of matching pieces to a position
 	
 	public void makeMove(int pieceNumber, Point position) {
-		if ((pieces[pieceNumber].getPieceType() == 0) && (squareIsAvailable(position))) {
-			if (position.getX() <= 5) {
-				
-				
-			}
-		} else if ((pieces[pieceNumber].getPieceType() == 1)  && (squareIsAvailable(position))) {
-			
-		} else if ((pieces[pieceNumber].getPieceType() == 2)  && (squareIsAvailable(position))) {
-			
+		if (legalMove(pieceNumber, position) == true) {
+			Point tempPosition = map.get(pieces[pieceNumber]);
+			map.put(pieces[pieceNumber], position); // piece to new position
+			map.put(null, tempPosition); // old position has null piece
+		} else {
+			//
 		}
 		
 	}	
@@ -58,8 +55,12 @@ public class Game {
 		
 	}
 	
-	public boolean ifLegalMove() {
-		return true;
+	public boolean legalMove(int pieceNumber, Point position) {
+		if ((squareIsAvailable(position)) && (moveIsDiagonal(pieceNumber, position))) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public boolean ifLegalJump() {
@@ -72,6 +73,25 @@ public class Game {
 	
 	public boolean noMovesLeft() {
 		return false;
+	}
+	
+	public boolean moveIsDiagonal(int pieceNumber, Point position) {
+		if (pieces[pieceNumber].getPieceType() == 0) {
+			if ((position.getY() == positions[pieceNumber].getY() + 1) && ((position.getX() == (positions[pieceNumber].getX() - 1)) || (position.getX() == 1))) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if (pieces[pieceNumber].getPieceType() == 1) {
+			if ((position.getY() == positions[pieceNumber].getY() - 1) && ((position.getX() == (positions[pieceNumber].getX() - 1)) || (position.getX() == 1))) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+
 	}
 	
 	public boolean squareIsAvailable(Point position) {
