@@ -2,7 +2,8 @@ package checkers;
 
 public class Piece {
 	
-	private int pieceType; // RED = 0, BLACK = 1, KING = 2;
+	private int pieceType;
+	public static final int NULL = 0, RED = 1, BLACK = 2, KING = 3;
 	
 	public Piece(int pieceType) {
 		this.setPieceType(pieceType);
