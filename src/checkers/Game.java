@@ -7,10 +7,11 @@ import java.awt.Point;
 
 public class Game {
 	
-//	Piece[] pieces = new Piece[24];
-//	Point[] positions = new Point[64];
+	private boolean gameIsOn;
 	
-	public Game() {}
+	public Game(boolean gameIsOn) {
+		this.gameIsOn = gameIsOn;
+	}
 
 	Map<Piece, Point> map = new HashMap<>();
 	
@@ -46,16 +47,17 @@ public class Game {
 		System.out.println("CHECKERS BOARD: ");
 		for(Map.Entry<Piece, Point> entry : map.entrySet()) {
 			if (entry.getKey().getPieceType() == Piece.BLACK) {
-				System.out.println("BLACK || (" + entry.getValue().getX() + ", " + entry.getValue().getY() + ")");
+				System.out.println("BLACK -> (" + entry.getValue().getX() + ", " + entry.getValue().getY() + ")");
 			} else if ((entry.getKey().getPieceType() == Piece.RED)) {
-				System.out.println("RED || (" + entry.getValue().getX() + ", " + entry.getValue().getY() + ")");
+				System.out.println("RED -> (" + entry.getValue().getX() + ", " + entry.getValue().getY() + ")");
 			}
 		}
-	
 	}
+
 //	
-//	public void makeMove(int pieceNumber, Point position) {
-//		if (legalMove(pieceNumber, position) == true) {
+//	public void move(int pieceNumber, int x, int y) {
+//		Point p = new Point(x, y);
+//		if (legalMove(pieceNumber, p.getLocation().) == true) {
 //			Point tempPosition = map.get(pieces[pieceNumber]);
 //			map.put(pieces[pieceNumber], position); // piece to new position
 //			map.put(null, tempPosition); // old position has null piece
@@ -107,12 +109,23 @@ public class Game {
 //
 //	}
 //	
-//	public boolean squareIsAvailable(Point position) {
-//		if (map.get(position) != null) {
-//			return false;
-//		} else { 
-//			return true;
-//		}
-//	}
+
+		
+	public boolean squareIsAvailable(Point position) {
+		if (map.get(position) != null) {
+			System.out.println(map.get(position).getX() + ", " + map.get(position).getX() );
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isGameOn() {
+		return gameIsOn;
+	}
+
+	public void setGameOn(boolean gameIsOn) {
+		this.gameIsOn = gameIsOn;
+	}
 
 }
