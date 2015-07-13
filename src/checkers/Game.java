@@ -15,40 +15,22 @@ public class Game {
 
 	Map<Point, Piece> map = new HashMap<>();
 	
-	public void move(Point oldPosition, Point newPosition, Player player) {
-		if (playerCheck(player, oldPosition)) {
-			if (squareIsAvailable(newPosition)) {
-				if (diagonalMove(oldPosition, newPosition)) {
-					
-					System.out.println(map.containsKey(oldPosition));
-					System.out.println(map.containsKey(newPosition));
-					Piece temp = map.get(oldPosition);
-					map.remove(oldPosition);
-					map.put(newPosition, temp);
-					System.out.println(map.containsKey(oldPosition));
-					System.out.println(map.containsKey(newPosition));
-					
-				} else if (diagonalJump(oldPosition, newPosition)) {
-					if (jumpCheck(oldPosition) != null) {
-						Piece temp = map.get(oldPosition);
-						map.remove(oldPosition);
-						map.remove(jumpCheck(oldPosition));
-						map.put(newPosition, temp);
-					} else 
-						System.out.println("ERROR: There's nothing to jump!");
-				} else {
-					System.out.println("ERROR: This square is available but it's not a move or a jump!");
-				}	
-			} else {
-				System.out.println("ERROR: This square is not available!");
-			}
-		} else {
-			System.out.println("ERROR: Not your piece!");
-		}
-	
+	public void move(Point oldPosition, Point newPosition) {
+		Piece temp = map.get(oldPosition);
+		map.remove(oldPosition);
+		map.put(newPosition, temp);
 	}
 	
-	public Point jumpCheck(Point oldPosition) {
+	public void jump(Point oldPosition, Point newPosition) {
+		Piece temp = map.get(oldPosition);
+		map.remove(oldPosition);
+		map.remove(jumpCheck(oldPosition));
+		map.put(newPosition, temp);
+		
+	}
+
+	
+	public Point jumpCheck(Point oldPosition) { // check if jumping over opponent piece
 		if (map.get(oldPosition).getPieceType() == Piece.RED) {
 			if (map.get(new Point(oldPosition.x+1, oldPosition.y+1)).getPieceType() == Piece.BLACK) {
 				return new Point(oldPosition.x+1, oldPosition.y+1);
@@ -133,8 +115,6 @@ public class Game {
 				System.out.println("BLACK -> (" + entry.getKey().getX() + ", " + entry.getKey().getY() + ")");
 			} else if ((entry.getValue().getPieceType() == Piece.RED)) {
 				System.out.println("RED -> (" + entry.getKey().getX() + ", " + entry.getKey().getY() + ")");
-			} else if (entry.getValue() == null) {
-				System.out.println("NULL -> (" + entry.getKey().getX() + ", " + entry.getKey().getY() + ")");
 			}
 		}
 		System.out.println("/////////");
@@ -164,7 +144,7 @@ public class Game {
 	}
 
 	public boolean isGameOn() { // whether the game is on or off
-		return gameIsOn;
+		return true;
 	}
 
 	public void setGameOn(boolean gameIsOn) { // setter for game
