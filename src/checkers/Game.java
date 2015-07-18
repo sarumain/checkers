@@ -19,6 +19,7 @@ public class Game {
 		Piece temp = map.get(oldPosition);
 		map.remove(oldPosition);
 		map.put(newPosition, temp);
+
 	}
 	
 	public void jump(Point oldPosition, Point newPosition) {
@@ -29,7 +30,6 @@ public class Game {
 		
 	}
 
-	
 	public Point jumpCheck(Point oldPosition) { // check if jumping over opponent piece
 		if (map.get(oldPosition).getPieceType() == Piece.RED) {
 			if (map.get(new Point(oldPosition.x+1, oldPosition.y+1)).getPieceType() == Piece.BLACK) {
@@ -142,7 +142,23 @@ public class Game {
 			}
 		}
 	}
-
+	public boolean anyPiecesLeft() {
+		for(Entry<Point, Piece> entry : map.entrySet()) {
+			if (entry.getValue().getPieceType() == Piece.BLACK) {
+				return true;
+			} else if ((entry.getValue().getPieceType() == Piece.RED)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean anyMovesLeft() {
+		return true;
+	}
+	
 	public boolean isGameOn() { // whether the game is on or off
 		return true;
 	}
