@@ -196,7 +196,7 @@ public class Game {
 			}
 		}
 	}
-	public boolean anyPiecesLeft() {
+	public String anyPiecesLeft() {
 		int RED = 0;
 		int BLACK = 0;
 		for(Entry<Point, Piece> entry : map.entrySet()) {
@@ -206,18 +206,20 @@ public class Game {
 				RED++;
 			}
 		}
-		if (BLACK == 0 || RED == 0) {
-			return false;
+		if (BLACK == 0) {
+			return "Congratulations PLAYER 1, you have won the game!";
+		} else if (RED == 0) {
+			return "Congrautlations PLAYER 2, you have won the game!";
 		} else {
-			return true;
+			return null;	
 		}
 	}
 	
 	public boolean isGameOn() { // whether the game is on or off
-		if (anyPiecesLeft()) {
+		if (anyPiecesLeft() == null) {
 			return true;
 		} else {
-		return  false;
+			return false;
 		}
 	}
 
