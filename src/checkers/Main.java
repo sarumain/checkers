@@ -88,6 +88,12 @@ public class Main{
         			g.move(new Point(oldX, oldY), new Point(newX, newY));
         		}
         		
+        		if (g.turnsKing(new Point(newX, newY))) { // king functionality
+        			g.map.get(new Point(newX, newY)).setKing(true);
+        		} else {
+        			//
+        		}
+        		
         		// need a way to check if the game is over
         		// no pieces left
 

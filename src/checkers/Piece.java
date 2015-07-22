@@ -3,11 +3,14 @@ package checkers;
 public class Piece {
 	
 	private int pieceType;
-	public static final int NULL = 0, RED = 1, BLACK = 2, KING = 3;
+	public static final int RED = 1, BLACK = 2;
+	private boolean isKing;
 	
 	public Piece(int pieceType) {
 		this.setPieceType(pieceType);
+		setKing(false);
 	}
+	
 
 	int getPieceType() {
 		return pieceType;
@@ -15,6 +18,16 @@ public class Piece {
 
 	void setPieceType(int pieceType) {
 		this.pieceType = pieceType;
+	}
+
+
+	public boolean isKing() {
+		return isKing;
+	}
+
+
+	public void setKing(boolean isKing) {
+		this.isKing = isKing;
 	}
 
 }

@@ -15,6 +15,16 @@ public class Game {
 
 	Map<Point, Piece> map = new HashMap<>();
 	
+	public boolean turnsKing(Point currentPosition) {
+		if ((map.get(currentPosition).getPieceType() == Piece.RED) && (currentPosition.getY() == 7)) {
+			return true;
+		} else if ((map.get(currentPosition).getPieceType() == Piece.BLACK) && (currentPosition.getY() == 0)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public void move(Point oldPosition, Point newPosition) {
 		Piece temp = map.get(oldPosition);
 		map.remove(oldPosition);
@@ -27,7 +37,6 @@ public class Game {
 		map.remove(jumpCheck(oldPosition));
 		map.remove(oldPosition);
 		map.put(newPosition, temp);
-		
 	}
 	
 	public Point jumpCheck(Point oldPosition) { // check if jumping over opponent piece
@@ -69,36 +78,65 @@ public class Game {
 	}
 
 	public boolean diagonalJump(Point oldPosition, Point newPosition) {
-		if (map.get(oldPosition).getPieceType() == Piece.RED) {
-			if ((newPosition.getY() == oldPosition.getY() + 2) && ((newPosition.getX() == oldPosition.getX() - 2)) || (newPosition.getX() == oldPosition.getX() + 2)) {
-				return true;
+		if (map.containsKey(newPosition)) {
+			if (map.get(oldPosition).isKing()) {
+				if (((newPosition.getY() == oldPosition.getY() + 2) && ((newPosition.getX() == oldPosition.getX() - 2)) || (newPosition.getX() == oldPosition.getX() + 2)) || ((newPosition.getY() == oldPosition.getY() - 2) && ((newPosition.getX() == oldPosition.getX() - 2)) || (newPosition.getX() == oldPosition.getX() + 2))) {
+					return true;
+				} else {
+					return false;
+				}
+				
 			} else {
-				return false;
+				if (map.get(oldPosition).getPieceType() == Piece.RED) {
+					if ((newPosition.getY() == oldPosition.getY() + 2) && ((newPosition.getX() == oldPosition.getX() - 2)) || (newPosition.getX() == oldPosition.getX() + 2)) {
+						return true;
+					} else {
+						return false;
+					}
+				} else if (map.get(oldPosition).getPieceType() == Piece.BLACK) {
+					if ((newPosition.getY() == oldPosition.getY() - 2) && ((newPosition.getX() == oldPosition.getX() - 2)) || (newPosition.getX() == oldPosition.getX() + 2)) {
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}		
 			}
-		} else if (map.get(oldPosition).getPieceType() == Piece.BLACK) {
-			if ((newPosition.getY() == oldPosition.getY() - 2) && ((newPosition.getX() == oldPosition.getX() - 2)) || (newPosition.getX() == oldPosition.getX() + 2)) {
-				return true;
-			} else {
-				return false;
-			}
+			
 		} else {
 			return false;
 		}
 	}
 	
 	public boolean diagonalMove(Point oldPosition, Point newPosition) {
-		if (map.get(oldPosition).getPieceType() == Piece.RED) {
-			if ((newPosition.getY() == oldPosition.getY() + 1) && ((newPosition.getX() == oldPosition.getX() - 1)) || (newPosition.getX() == oldPosition.getX() + 1)) {
-				return true;
+		if (map.containsKey(newPosition)) {
+			
+			if ((map.get(oldPosition).isKing())) {
+				if (((newPosition.getY() == oldPosition.getY() + 1) && ((newPosition.getX() == oldPosition.getX() - 1)) || (newPosition.getX() == oldPosition.getX() + 1)) || ((newPosition.getY() == oldPosition.getY() - 1) && ((newPosition.getX() == oldPosition.getX() - 1)) || (newPosition.getX() == oldPosition.getX() + 1))) {
+					return true;
+				} else {
+					return false;
+				}
 			} else {
-				return false;
-			}
-		} else if (map.get(oldPosition).getPieceType() == Piece.BLACK) {
-			if ((newPosition.getY() == oldPosition.getY() - 1) && ((newPosition.getX() == oldPosition.getX() - 1)) || (newPosition.getX() == oldPosition.getX() + 1)) {
-				return true;
-			} else {
-				return false;
-			}
+				if (map.get(oldPosition).getPieceType() == Piece.RED) {
+					if ((newPosition.getY() == oldPosition.getY() + 1) && ((newPosition.getX() == oldPosition.getX() - 1)) || (newPosition.getX() == oldPosition.getX() + 1)) {
+						return true;
+					} else {
+						return false;
+					}
+				} else if (map.get(oldPosition).getPieceType() == Piece.BLACK) {
+					if ((newPosition.getY() == oldPosition.getY() - 1) && ((newPosition.getX() == oldPosition.getX() - 1)) || (newPosition.getX() == oldPosition.getX() + 1)) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+					else {
+					return false;
+				}		
+		   }
+		
 		} else {
 			return false;
 		}
@@ -174,7 +212,6 @@ public class Game {
 			return true;
 		}
 	}
-	
 	
 	public boolean isGameOn() { // whether the game is on or off
 		if (anyPiecesLeft()) {
