@@ -24,26 +24,42 @@ public class Game {
 	
 	public void jump(Point oldPosition, Point newPosition) {
 		Piece temp = map.get(oldPosition);
-		map.remove(oldPosition);
 		map.remove(jumpCheck(oldPosition));
+		map.remove(oldPosition);
 		map.put(newPosition, temp);
 		
 	}
-
+	
 	public Point jumpCheck(Point oldPosition) { // check if jumping over opponent piece
 		if (map.get(oldPosition).getPieceType() == Piece.RED) {
-			if (map.get(new Point(oldPosition.x+1, oldPosition.y+1)).getPieceType() == Piece.BLACK) {
-				return new Point(oldPosition.x+1, oldPosition.y+1);
-			} else if (map.get(new Point(oldPosition.x-1, oldPosition.y+1)).getPieceType() == Piece.BLACK) {
-				return new Point(oldPosition.x-1, oldPosition.y+1);
+			if (map.containsKey(new Point(oldPosition.x+1, oldPosition.y+1))) {
+				if (map.get(new Point(oldPosition.x+1, oldPosition.y+1)).getPieceType() == Piece.BLACK) {
+					return new Point(oldPosition.x+1, oldPosition.y+1);
+				} else {
+					return null; // there's a piece diagonally but it's on the same team
+				}
+			} else if (map.containsKey(new Point(oldPosition.x-1, oldPosition.y+1))) {
+				if (map.get(new Point(oldPosition.x-1, oldPosition.y+1)).getPieceType() == Piece.BLACK) {
+					return new Point(oldPosition.x-1, oldPosition.y+1);
+				} else {
+					return null; // there's a piece diagonally but it's on the same team
+				}
 			} else {
 				return null;
 			}
 		} else if (map.get(oldPosition).getPieceType() == Piece.BLACK) {
-			if (map.get(new Point(oldPosition.x+1, oldPosition.y-1)).getPieceType() == Piece.BLACK) {
-				return new Point(oldPosition.x+1, oldPosition.y-1);
-			} else if (map.get(new Point(oldPosition.x-1, oldPosition.y-1)).getPieceType() == Piece.BLACK) {
-				return new Point(oldPosition.x+1, oldPosition.y-1);
+			if (map.containsKey(new Point(new Point(oldPosition.x+1, oldPosition.y-1)))) {
+				if (map.get(new Point(oldPosition.x+1, oldPosition.y+1)).getPieceType() == Piece.RED) {
+					return new Point(oldPosition.x+1, oldPosition.y+1);
+				} else {
+					return null; // there's a piece diagonally but it's on the same team
+				}
+			} else if (map.containsKey(new Point(new Point(oldPosition.x-1, oldPosition.y-1)))) {
+				if (map.get(new Point(oldPosition.x-1, oldPosition.y-1)).getPieceType() == Piece.BLACK) {
+					return new Point(oldPosition.x+1, oldPosition.y-1);
+				} else {
+					return null; // there's a piece diagonally but it's on the same team
+				}
 			} else {
 				return null;
 			}
@@ -143,24 +159,29 @@ public class Game {
 		}
 	}
 	public boolean anyPiecesLeft() {
+		int RED = 0;
+		int BLACK = 0;
 		for(Entry<Point, Piece> entry : map.entrySet()) {
 			if (entry.getValue().getPieceType() == Piece.BLACK) {
-				return true;
+				BLACK++;
 			} else if ((entry.getValue().getPieceType() == Piece.RED)) {
-				return true;
-			} else {
-				return false;
+				RED++;
 			}
 		}
-		return true;
+		if (BLACK == 0 || RED == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
-	public boolean anyMovesLeft() {
-		return true;
-	}
 	
 	public boolean isGameOn() { // whether the game is on or off
-		return true;
+		if (anyPiecesLeft()) {
+			return true;
+		} else {
+		return  false;
+		}
 	}
 
 	public void setGameOn(boolean gameIsOn) { // setter for game

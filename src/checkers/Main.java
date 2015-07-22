@@ -17,7 +17,7 @@ public class Main{
         	int oldX = 0, oldY = 0, newX = 0, newY = 0;
         	Player currentPlayer = p1;
         	
-        	while(g.isGameOn()) {
+        	while(g.isGameOn() == true) {
         		
         		g.displayPieces();
         		
@@ -64,6 +64,7 @@ public class Main{
         					} else if (g.diagonalJump(new Point(oldX, oldY), new Point(newX, newY))) {
         						if (g.jumpCheck(new Point(oldX, oldY)) != null) {
         							validJump = true;
+        							validMove = true;
         						} else {
         							System.out.println("ERROR: There's nothing to jump!");
         							validMove = false;
